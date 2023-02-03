@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"
     $username = htmlspecialchars($_POST['username']);
     $password = password_hash(htmlspecialchars($_POST['password']), PASSWORD_DEFAULT); //BCrypt is used for encrypting the password
 
+
     $conn = connect();
 
     $sql = "SELECT * FROM `tbl_admin` WHERE `username` = :username";

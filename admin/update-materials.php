@@ -31,27 +31,29 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"
 
             $ext1 = explode('.', $image_name); //gets the extention of the image
             $ext = end($ext1);
-            $image_name = "Material-Name-" . rand(0000, 9999) . '.' . $ext; //renamed image
 
-            //get the source path and destination path
-            $src_path = $_FILES['image']['tmp_name'];  //source path
-            $dest_path = "../images/material/" . $image_name; //destination path
+            if($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png'){
+                $image_name = "Material-Name-" . rand(0000, 9999) . '.' . $ext; //renamed image
 
-            //upload the image
-            $upload = move_uploaded_file($src_path, $dest_path);
+                //get the source path and destination path
+                $src_path = $_FILES['image']['tmp_name'];  //source path
+                $dest_path = SITE_URL . "uploads/materials/" . basename($image_name); //destination path
 
-            //check whether the image is uploaded or not
-            if ($upload == false) {
-                //failed to upload
-                $_SESSION['upload'] = "<div class='error'>Failed to Upload new image file.</div>";
+                //upload the image
+                $upload = move_uploaded_file($src_path, $dest_path);
 
-                //redirect to manage materials
-                header('location:' . SITE_URL . 'admin/manage-materials.php');
+                //check whether the image is uploaded or not
+                if ($upload == false) {
+                    //failed to upload
+                    $_SESSION['upload'] = "<div class='error'>Failed to Upload new image file.</div>";
 
-                //stop the process 
-                die();
+                    //redirect to manage materials
+                    header('location:' . SITE_URL . 'admin/manage-materials.php');
+
+                    //stop the process 
+                    die();
+                }
             }
-
 
             //remove the image if new image is uploaded and current image exists
             //remove current image if available

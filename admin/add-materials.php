@@ -37,22 +37,24 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"
             $ext1 = explode('.', $image_name);
             $ext = end($ext1);
 
-            $image_name = "Material-" . rand(0000, 9999) . "." . $ext; //new image name
+            if($ext == 'jpg' || $ext == 'jpeg' || $ext == 'png'){
+                $image_name = "Material-" . rand(0000, 9999) . "." . $ext; //new image name
 
-            //upload the image
-            //src path and the destination path
-            $src = $_FILES['image']['tmp_name'];
-            $dst = "../images/material/" . $image_name;
+                //upload the image
+                //src path and the destination path
+                $src = $_FILES['image']['tmp_name'];
+                $dst = SITE_URL . "uploads/materials/" . basename($image_name);
 
-            $upload = move_uploaded_file($src, $dst);
+                $upload = move_uploaded_file($src, $dst);
 
-            //check whether the image uploaded or  not
-            if ($upload == FALSE) {
-                //Failed to  upload
-                //redirect to manage-material
-                $_SESSION['upload'] = "<div class='error'>Failed To Upload Image</div>";
-                header('location: ' . SITE_URL . 'admin/add-materials.php');
-                die(); //stop the process
+                //check whether the image uploaded or  not
+                if ($upload == FALSE) {
+                    //Failed to  upload
+                    //redirect to manage-material
+                    $_SESSION['upload'] = "<div class='error'>Failed To Upload Image</div>";
+                    header('location: ' . SITE_URL . 'admin/add-materials.php');
+                    die(); //stop the process
+                }
             }
         }
     } else {
