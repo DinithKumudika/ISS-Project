@@ -61,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"
                 //current image is available
                 //remove the image
                 $remove_path = SITE_URL . "uploads/materials/" . basename($current_image);
-
                 $remove = unlink($remove_path);
 
                 //check whether the image is removed or not
