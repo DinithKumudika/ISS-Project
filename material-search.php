@@ -3,9 +3,9 @@
     <!-- sEARCH Section Starts Here -->
     <section class="material-search text-center">
         <div class="container">
-        <?php 
+        <?php
             //get the search key word
-            $search = mysqli_real_escape_string($conn,$_POST['search']);
+            $search = htmlspecialchars($_POST['search']);
             ?>
             <h2>Materials on Your Search "<?php echo $search; ?>"</h2>
 
@@ -20,19 +20,21 @@
         <div class="container">
             
             <?php 
-            
-
+            $conn = connect();
             //sql query to get materials based on search keyword
-            $sql = "SELECT * FROM tbl_materials WHERE title like '%$search%' OR description LIKE '%$search%' ";
-
-            //execute the query 
-            $res = mysqli_query($conn, $sql);
+            $sql = "SELECT * FROM `tbl_materials` WHERE `title` LIKE CONCAT('%',:search_1,'%') OR `description` LIKE CONCAT('%',:search_2,'%')";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute([
+                'search_1'=>$search,
+                'search_2'=>$search
+            ]);
+            $rows = $stmt->fetchAll();
             
-            $count = mysqli_num_rows($res);
+            $count = $stmt->rowCount();
             //check whether materils available or not
             if($count>0){
                 //material available
-                while($row = mysqli_fetch_assoc($res)){
+                foreach($rows as $row){
                     //get the details
                     $id = $row['id'];
                     $title = $row['title'];
@@ -51,7 +53,7 @@
                                 else{
                                     //image is available
                                     ?>
-                                        <img src="<?php echo SITEURL;?>images/material/<?php echo $image_name; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
+                                        <img src="<?php echo SITE_URL;?>images/material/<?php echo $image_name; ?>" alt="Chicke Hawain Pizza" class="img-responsive img-curve">
                                     <?php
                                 } 
                             ?>
@@ -66,7 +68,7 @@
                             </p>
                             <br>
 
-                            <a href="<?php echo SITEURL; ?>order.php?material_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
+                            <a href="<?php echo SITE_URL; ?>order.php?material_id=<?php echo $id; ?>" class="btn btn-primary">Order Now</a>
                         </div>
                     </div>
 

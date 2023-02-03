@@ -27,7 +27,7 @@
             </div>
             <div class="wrapper">
                 <ul>
-                    <li><a href="<?php echo SITEURL; ?>">Home</a></li>
+                    <li><a href="<?php echo SITE_URL; ?>">Home</a></li>
                     <li><a href="index.php">Dashboard</a></li>
                     <li><a href="manage-admin.php">Admin</a></li>
                     <li><a href="manage-category.php">Category</a></li>
