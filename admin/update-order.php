@@ -29,12 +29,12 @@
                 else{
                     //details are not available
                     //redirect to mange order page
-                    header('location:'.SITEURL.'admin/manage-order.php');
+                    header('location:'.SITE_URL.'admin/manage-order.php');
                 }
             }
             else{
                 //redirect to manage order page
-                header('location:'.SITEURL.'admin/manage-order.php');
+                header('location:'.SITE_URL.'admin/manage-order.php');
             }
         ?>
         <form action="" method="POST">
@@ -92,7 +92,7 @@
                 </tr>
                 <tr>
                     <td colspan="2">
-                        <input type="hidden" name="id" value="<?php echo $id;?>">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
                         <input type="hidden" name="price" value="<?php echo $price;?>">
                         <input class="btn-update" type="submit" name="submit" value="Update Order">
 
@@ -133,12 +133,12 @@
                 if($res2 == true){
                     //updated
                     $_SESSION['update'] = "<div class='success'>Order Updated Successfully</div>";
-                    header('location:'.SITEURL.'admin/manage-order.php');
+                    header('location:'.SITE_URL.'admin/manage-order.php');
                 }
                 else{
                     //failed to update
                     $_SESSION['update'] = "<div class='error'>Failed To Update</div>";
-                    header('location:'.SITEURL.'admin/manage-order.php');
+                    header('location:'.SITE_URL.'admin/manage-order.php');
                 }
             }
         ?>

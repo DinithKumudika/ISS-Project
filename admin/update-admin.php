@@ -78,7 +78,7 @@
                 <tr>
                     <td colspan="2">
                     <br />
-                        <input type="hidden" name="id" value="<?php echo $id ?>">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
                         <input type="submit" name="submit" value="Update Admin" class="btn-update"> 
 
                     </td>

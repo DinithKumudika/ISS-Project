@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
 
             //remove the current image if available
             if ($current_image != "") {
-                $remove_path = "../images/category/" . $current_image;
+                $remove_path = SITE_URL . "uploads/category/" . basename($current_image);
                 $remove = unlink($remove_path);
 
                 //check whether the image is removed
@@ -127,7 +127,7 @@ if (isset($_POST['submit'])) {
                 <tr>
                     <td>Title </td>
                     <td>
-                        <input type="text" name="title" value="<?php echo $title; ?>">
+                        <input type="text" name="title" value="<?php echo htmlspecialchars($title); ?>">
                     </td>
                 </tr>
                 <tr>
@@ -137,7 +137,7 @@ if (isset($_POST['submit'])) {
                         if ($current_image != "") {
                         ?>
                             <!--display the image-->
-                            <img src="<?php echo SITE_URL; ?>images/category/<?php echo $current_image; ?>" width="150px">
+                            <img src="<?php echo SITE_URL; ?>uploads/category/<?php echo htmlspecialchars($current_image); ?>" width="150px">
                         <?php
 
                         } else {
@@ -180,8 +180,8 @@ if (isset($_POST['submit'])) {
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
-                        <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($current_image); ?>">
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
                         <input type="submit" name="submit" class="btn-update" value="Update Category">
                     </td>
                 </tr>

@@ -60,8 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST" || $_SERVER['REQUEST_METHOD'] == "post"
             if ($current_image != "") {
                 //current image is available
                 //remove the image
-                $remove_path = "../images/material/" . $current_image;
-
+                $remove_path = SITE_URL . "uploads/materials/" . basename($current_image);
                 $remove = unlink($remove_path);
 
                 //check whether the image is removed or not
@@ -186,7 +185,7 @@ if (isset($_GET['id'])) {
                         } else {
                             //image avilable
                         ?>
-                            <img src="<?php echo SITE_URL; ?>images/material/<?php echo $current_image; ?>" width="150px">
+                            <img src="<?php echo SITE_URL; ?>images/material/<?php echo htmlspecialchars($current_image); ?>" width="150px">
                         <?php
                         }
                         ?>
@@ -259,9 +258,8 @@ if (isset($_GET['id'])) {
                 </tr>
                 <tr>
                     <td>
-                        <input type="hidden" name="id" value="<?php echo $id; ?>">
-                        <input type="hidden" name="current_image" value="<?php echo $current_image; ?>">
-
+                        <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+                        <input type="hidden" name="current_image" value="<?php echo htmlspecialchars($current_image); ?>">
                         <input type="submit" name="submit" value="Update" class="btn-update">
                     </td>
 
