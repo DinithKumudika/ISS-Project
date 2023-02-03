@@ -6,13 +6,18 @@
             <h2 class="text-center">Categories</h2>
             <?php 
                 //display all the categories which are active
-                $sql = "SELECT * FROM `tbl_category` WHERE active='Yes'";
-                $res = mysqli_query($conn,$sql);
-                $count = mysqli_num_rows($res);
+                $conn = connect();
+                $sql = "SELECT * FROM `tbl_category` WHERE active = :is_active";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute([
+                    'is_active'=>'Yes'
+                ]);
+                $rows = $stmt->fetchAll();
+                $count = $stmt->rowCount();
 
                 if($count>0){
                     //categories are available
-                    while($row=mysqli_fetch_assoc($res)){
+                    foreach($rows as $row){
                         //get the values
 
                         $id = $row['id'];
@@ -30,7 +35,7 @@
                                     else{
                                         //image available
                                         ?>
-                                            <img src="<?php echo SITEURL; ?>images/category/<?php echo $image_name?>" class="img-responsive img-curve">
+                                            <img src="<?php echo SITE_URL; ?>images/category/<?php echo $image_name?>" class="img-responsive img-curve">
 
                                         <?php
                                     }
@@ -50,9 +55,6 @@
                     echo "<div class='error'>Category Not Found</div>";
                 }
             ?>
-
-            
-         
 
         <div class="clearfix"></div>
         </div>

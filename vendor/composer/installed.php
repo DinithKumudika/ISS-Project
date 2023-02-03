@@ -1,22 +1,31 @@
 <?php return array(
     'root' => array(
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
+        'pretty_version' => '1.0.0+no-version-set',
+        'version' => '1.0.0.0',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '791ffa919965d0bc5a6bc57914d7ebdf32421927',
+        'reference' => NULL,
         'name' => '__root__',
         'dev' => true,
     ),
     'versions' => array(
         '__root__' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
+            'pretty_version' => '1.0.0+no-version-set',
+            'version' => '1.0.0.0',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '791ffa919965d0bc5a6bc57914d7ebdf32421927',
+            'reference' => NULL,
+            'dev_requirement' => false,
+        ),
+        'gilbitron/easycsrf' => array(
+            'pretty_version' => '1.5.1',
+            'version' => '1.5.1.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../gilbitron/easycsrf',
+            'aliases' => array(),
+            'reference' => 'e09c3726e33911663e88fb50e0c8030a445a7d92',
             'dev_requirement' => false,
         ),
         'graham-campbell/result-type' => array(

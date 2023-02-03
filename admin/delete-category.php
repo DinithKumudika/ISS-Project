@@ -10,7 +10,7 @@
         //remove the image file if available
         if($image_name != ""){
             //image is available
-            $path = "../images/category/".$image_name;
+            $path = SITE_URL . "uploads/category/". basename($image_name);
             //remove the image
             $remove = unlink($path);
 
@@ -18,7 +18,7 @@
             if($remove == false){
                 //set the session message and redirect to manage category
                 $_SESSION['remove'] = "dav class='error'>Failed to Remove Category</div>";
-                header('location:'.SITEURL.'admin/manage-category.php');
+                header('location:'.SITE_URL.'admin/manage-category.php');
                 //stop the process
                 die();
             }
@@ -31,13 +31,13 @@
             //Set success message and redirect
             $_SESSION['delete'] = "<div class='success'>Category Deleted Successfully</div>";
             //redirect to manage category
-            header('location:'.SITEURL.'admin/manage-category.php');
+            header('location:'.SITE_URL.'admin/manage-category.php');
         } 
         else{
             //Set fail message and redirect
             $_SESSION['delete'] = "<div class='error'>Failed to Delete Category </div>";
             //redirect to manage category
-            header('location:'.SITEURL.'admin/manage-category.php');
+            header('location:'.SITE_URL.'admin/manage-category.php');
 
         }
 
@@ -46,7 +46,7 @@
     }
     else{
         //redirect to manage-category page
-        header('location:'.SITEURL.'admin/manage-category.php');
+        header('location:'.SITE_URL.'admin/manage-category.php');
         
     }
 ?>

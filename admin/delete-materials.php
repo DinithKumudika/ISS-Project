@@ -6,14 +6,14 @@ if(isset($_GET['id']) && isset($_GET['image_name'])){
     //process to delete
 
     //get id and image name
-    $id = $_GET['id'];
-    $image_name = $_GET['image_name'];
+    $id = htmlspecialchars($_GET['id']);
+    $image_name = htmlspecialchars($_GET['image_name']);
 
     //check whether the image is available or not and remove the image if available
     if($image_name != ""){
 
         //get the path of the image
-        $path = "../images/material/".$image_name;
+        $path = SITE_URL . "uploads/materials/". basename($image_name);
 
         //remove image file from the folder
         $remove = unlink($path);
@@ -24,7 +24,7 @@ if(isset($_GET['id']) && isset($_GET['image_name'])){
             $_SESSION['upload'] = "<div class='error'>Failed to Remove image file.</div>";
 
             //redirect to manage materials
-            header('location:'.SITEURL.'admin/manage-materials.php');
+            header('location:'.SITE_URL.'admin/manage-materials.php');
 
             //stop the process of deleting material
             die();
@@ -44,20 +44,20 @@ if(isset($_GET['id']) && isset($_GET['image_name'])){
     //redirect to manage material page with session message
     if ($res==true){
           //material deleted 
-          $_SESSION['delete'] = "<div class='success'>Material Deleted Successfully.</div>";
-          header('location:'.SITEURL.'admin/manage-materials.php');
+        $_SESSION['delete'] = "<div class='success'>Material Deleted Successfully.</div>";
+        header('location:'.SITE_URL.'admin/manage-materials.php');
 
     }else{
         //failed to delete 
         $_SESSION['delete'] = "<div class='error'>Failed To Delete Material.</div>";
-        header('location:'.SITEURL.'admin/manage-materials.php');
+        header('location:'.SITE_URL.'admin/manage-materials.php');
     }     
     
 
 }else{
     //redirect to manage food page
     $_SESSION['unauthorize'] = "<div class='error'>Unauthorized Access.</div>";
-    header('location:'.SITEURL.'admin/manage-materials.php');
+    header('location:'.SITE_URL.'admin/manage-materials.php');
 
 }
 
